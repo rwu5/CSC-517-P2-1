@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_29_195850) do
+ActiveRecord::Schema.define(version: 2019_09_29_090541) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,6 +28,10 @@ ActiveRecord::Schema.define(version: 2019_09_29_195850) do
     t.string "isbn"
     t.string "title"
     t.integer "is_special_collection"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "university_id"
@@ -45,6 +49,16 @@ ActiveRecord::Schema.define(version: 2019_09_29_195850) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "university_id"
     t.index ["university_id"], name: "index_libraries_on_university_id"
+  end
+
+  create_table "library_book_lists", force: :cascade do |t|
+    t.integer "number"
+    t.integer "book_id", null: false
+    t.integer "library_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_library_book_lists_on_book_id"
+    t.index ["library_id"], name: "index_library_book_lists_on_library_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -72,5 +86,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_195850) do
   add_foreign_key "books", "libraries"
   add_foreign_key "books", "universities"
   add_foreign_key "libraries", "universities"
+  add_foreign_key "library_book_lists", "books"
+  add_foreign_key "library_book_lists", "libraries"
   add_foreign_key "students", "universities"
 end

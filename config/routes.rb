@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :library_book_lists
   devise_for :admins, controllers: {
       registrations: 'admins/registrations',
       sessions: 'admins/sessions'
