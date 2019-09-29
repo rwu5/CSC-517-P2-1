@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_29_090541) do
+ActiveRecord::Schema.define(version: 2019_09_29_195850) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,14 +28,14 @@ ActiveRecord::Schema.define(version: 2019_09_29_090541) do
     t.string "isbn"
     t.string "title"
     t.integer "is_special_collection"
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.integer "image_file_size"
-    t.datetime "image_updated_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "university_id"
     t.integer "library_id"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
     t.index ["library_id"], name: "index_books_on_library_id"
     t.index ["university_id"], name: "index_books_on_university_id"
   end
