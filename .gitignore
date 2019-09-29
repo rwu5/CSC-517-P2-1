@@ -38,3 +38,5 @@ yarn.lock
 .browserslistrc
 .idea
 Gemfile.lock
+.generators
+.rakeTasks

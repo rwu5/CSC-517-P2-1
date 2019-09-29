@@ -13,11 +13,13 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
+  # Don't care if the mailer can't send.
+  config.action_mailer.raise_delivery_errors = false
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
-    config.action_controller.perform_caching = true
+    config.action_controller.perform_caching = false
     config.action_controller.enable_fragment_cache_logging = true
 
     config.cache_store = :memory_store
@@ -51,6 +53,11 @@ Rails.application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  # Adds additional error checking when serving assets at runtime.
+  # Checks for improperly declared sprockets dependencies.
+  # Raises helpful error messages.
+  config.assets.raise_runtime_errors = true
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
