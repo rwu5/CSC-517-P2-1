@@ -37,6 +37,5 @@ yarn-debug.log*
 yarn.lock
 .browserslistrc
 .idea
-Gemfile.lock
 .generators
 .rakeTasks
