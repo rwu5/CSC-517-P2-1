@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_29_024317) do
+ActiveRecord::Schema.define(version: 2019_09_29_045432) do
+
+  create_table "libraries", force: :cascade do |t|
+    t.string "name"
+    t.string "location"
+    t.integer "max_day_can_borrow"
+    t.integer "overdue_fine"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "university_id"
+    t.index ["university_id"], name: "index_libraries_on_university_id"
+  end
 
   create_table "students", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -20,8 +31,12 @@ ActiveRecord::Schema.define(version: 2019_09_29_024317) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.integer "education_level"
+    t.integer "university_id"
     t.index ["email"], name: "index_students_on_email", unique: true
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
+    t.index ["university_id"], name: "index_students_on_university_id"
   end
 
   create_table "universities", force: :cascade do |t|
@@ -30,4 +45,6 @@ ActiveRecord::Schema.define(version: 2019_09_29_024317) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "libraries", "universities"
+  add_foreign_key "students", "universities"
 end
