@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
+  devise_for :admins, controllers: {
+      registrations: 'admins/registrations',
+      sessions: 'admins/sessions'
+  }
   resources :books
   resources :libraries
   resources :universities
   devise_for :students, controllers: {
-      registrations: 'students/registrations'
+      registrations: 'students/registrations',
+      sessions: 'students/sessions'
   }
   root to: 'home#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

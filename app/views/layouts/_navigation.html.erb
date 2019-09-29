@@ -7,24 +7,38 @@
       <span class="icon-bar"></span>
     </button>
     <a class="navbar-brand" href="#">RubyP2</a>
+    <!--    =================================================================-->
     <% if current_student %>
       <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
           <li><%= link_to "Link1", "/path1" %></li>
           <li><%= link_to "Link2", "/path2" %></li>
-          <li><%= link_to "logout", destroy_student_session_path, method: :delete %></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "#{current_student.name}" %></li>
           <li>
             <%= link_to("logout", destroy_student_session_path, method: :delete) %>
           </li>
         </ul>
+      </div>
     <% end %>
+      <!--    =================================================================-->
+    <% if current_admin %>
+      <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav">
+          <li><%= link_to "University", universities_path, method: :get %></li>
+          <li><%= link_to "Library", libraries_path, method: :get %></li>
+          <li><%= link_to "Book", books_path, method: :get %></li>
+        </ul>
 
-    </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <%= link_to("logout", destroy_admin_session_path, method: :delete) %>
+          </li>
+        </ul>
+      </div>
 
+    <% end %>
 
   </div>
 </div>

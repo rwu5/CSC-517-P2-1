@@ -12,6 +12,8 @@ Devise.setup do |config|
 
   config.scoped_views = true
 
+  config.sign_out_all_scopes = false
+
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
