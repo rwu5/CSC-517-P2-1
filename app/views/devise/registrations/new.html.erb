@@ -1,4 +1,4 @@
-<h1><%= t('.sign_up') %></h1>
+<h1><%= t('.Student sign_up') %></h1>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= bootstrap_devise_error_messages! %>
@@ -6,6 +6,11 @@
   <div class="form-group">
     <%= f.label :email %>
     <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, class: 'form-control'%>
   </div>
 
   <div class="form-group">
@@ -20,6 +25,17 @@
   <div class="form-group">
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :university_id %>
+    <%= select("student", "university_id", University.all.collect{ |c| [ c.name, c.id] }) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :education_level %><br />
+    <%= f.number_field :education_level, class: 'form-control' %>
+    <small class="form-text text-muted"><%= t('1:Undergraduate   2:Graduate   3:Phd') %></small>
   </div>
 
   <div class="form-group">
