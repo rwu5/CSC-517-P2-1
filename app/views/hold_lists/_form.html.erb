@@ -1,0 +1,32 @@
+<%= form_with(model: hold_list, local: true) do |form| %>
+  <% if hold_list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(hold_list.errors.count, "error") %> prohibited this hold_list from being saved:</h2>
+
+      <ul>
+        <% hold_list.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :student_id %>
+    <%= form.text_field :student_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :book_id %>
+    <%= form.text_field :book_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :library_id %>
+    <%= form.text_field :library_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

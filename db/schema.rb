@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_29_090541) do
+ActiveRecord::Schema.define(version: 2019_09_30_080751) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,16 +28,27 @@ ActiveRecord::Schema.define(version: 2019_09_29_090541) do
     t.string "isbn"
     t.string "title"
     t.integer "is_special_collection"
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.integer "image_file_size"
-    t.datetime "image_updated_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "university_id"
     t.integer "library_id"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
     t.index ["library_id"], name: "index_books_on_library_id"
     t.index ["university_id"], name: "index_books_on_university_id"
+  end
+
+  create_table "hold_lists", force: :cascade do |t|
+    t.integer "student_id", null: false
+    t.integer "book_id", null: false
+    t.integer "library_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_hold_lists_on_book_id"
+    t.index ["library_id"], name: "index_hold_lists_on_library_id"
+    t.index ["student_id"], name: "index_hold_lists_on_student_id"
   end
 
   create_table "libraries", force: :cascade do |t|
@@ -83,10 +94,24 @@ ActiveRecord::Schema.define(version: 2019_09_29_090541) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "wish_lists", force: :cascade do |t|
+    t.integer "student_id", null: false
+    t.integer "book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_wish_lists_on_book_id"
+    t.index ["student_id"], name: "index_wish_lists_on_student_id"
+  end
+
   add_foreign_key "books", "libraries"
   add_foreign_key "books", "universities"
+  add_foreign_key "hold_lists", "books"
+  add_foreign_key "hold_lists", "libraries"
+  add_foreign_key "hold_lists", "students"
   add_foreign_key "libraries", "universities"
   add_foreign_key "library_book_lists", "books"
   add_foreign_key "library_book_lists", "libraries"
   add_foreign_key "students", "universities"
+  add_foreign_key "wish_lists", "books"
+  add_foreign_key "wish_lists", "students"
 end
