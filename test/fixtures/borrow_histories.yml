@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  library: one
+  student: one
+  book: one
+
+two:
+  library: two
+  student: two
+  book: two

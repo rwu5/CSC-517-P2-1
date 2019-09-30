@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_30_081434) do
+ActiveRecord::Schema.define(version: 2019_09_30_081707) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -38,6 +38,17 @@ ActiveRecord::Schema.define(version: 2019_09_30_081434) do
     t.datetime "image_updated_at"
     t.index ["library_id"], name: "index_books_on_library_id"
     t.index ["university_id"], name: "index_books_on_university_id"
+  end
+
+  create_table "borrow_histories", force: :cascade do |t|
+    t.integer "library_id", null: false
+    t.integer "student_id", null: false
+    t.integer "book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_borrow_histories_on_book_id"
+    t.index ["library_id"], name: "index_borrow_histories_on_library_id"
+    t.index ["student_id"], name: "index_borrow_histories_on_student_id"
   end
 
   create_table "hold_lists", force: :cascade do |t|
@@ -114,6 +125,9 @@ ActiveRecord::Schema.define(version: 2019_09_30_081434) do
 
   add_foreign_key "books", "libraries"
   add_foreign_key "books", "universities"
+  add_foreign_key "borrow_histories", "books"
+  add_foreign_key "borrow_histories", "libraries"
+  add_foreign_key "borrow_histories", "students"
   add_foreign_key "hold_lists", "books"
   add_foreign_key "hold_lists", "libraries"
   add_foreign_key "hold_lists", "students"
