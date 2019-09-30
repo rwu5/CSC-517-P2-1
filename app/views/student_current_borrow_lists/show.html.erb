@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @student_current_borrow_list.student_id %>
+</p>
+
+<p>
+  <strong>Book:</strong>
+  <%= @student_current_borrow_list.book_id %>
+</p>
+
+<%= link_to 'Edit', edit_student_current_borrow_list_path(@student_current_borrow_list) %> |
+<%= link_to 'Back', student_current_borrow_lists_path %>

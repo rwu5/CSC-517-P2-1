@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_30_080751) do
+ActiveRecord::Schema.define(version: 2019_09_30_081434) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -72,6 +72,15 @@ ActiveRecord::Schema.define(version: 2019_09_30_080751) do
     t.index ["library_id"], name: "index_library_book_lists_on_library_id"
   end
 
+  create_table "student_current_borrow_lists", force: :cascade do |t|
+    t.integer "student_id", null: false
+    t.integer "book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_student_current_borrow_lists_on_book_id"
+    t.index ["student_id"], name: "index_student_current_borrow_lists_on_student_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -111,6 +120,8 @@ ActiveRecord::Schema.define(version: 2019_09_30_080751) do
   add_foreign_key "libraries", "universities"
   add_foreign_key "library_book_lists", "books"
   add_foreign_key "library_book_lists", "libraries"
+  add_foreign_key "student_current_borrow_lists", "books"
+  add_foreign_key "student_current_borrow_lists", "students"
   add_foreign_key "students", "universities"
   add_foreign_key "wish_lists", "books"
   add_foreign_key "wish_lists", "students"
