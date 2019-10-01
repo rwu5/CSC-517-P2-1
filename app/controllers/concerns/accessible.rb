@@ -14,7 +14,7 @@ module Accessible
     elsif current_student
       flash.clear
       # The authenticated root path can be defined in your routes.rb in: devise_scope :user do...
-      redirect_to(authenticated_student_root_path) && return
+      redirect_to(root_path) && return
     end
   end
 end

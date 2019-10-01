@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_30_081707) do
+ActiveRecord::Schema.define(version: 2019_10_01_071141) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2019_09_30_081707) do
     t.integer "library_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "hold"
     t.index ["book_id"], name: "index_library_book_lists_on_book_id"
     t.index ["library_id"], name: "index_library_book_lists_on_library_id"
   end

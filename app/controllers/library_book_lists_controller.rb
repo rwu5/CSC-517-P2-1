@@ -70,7 +70,7 @@ class LibraryBookListsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def library_book_list_params
-    params.require(:library_book_list).permit(:number, :book_id, :library_id)
+    params.require(:library_book_list).permit(:number, :book_id, :library_id, :hold)
   end
 
   def get_params(p)
@@ -78,6 +78,7 @@ class LibraryBookListsController < ApplicationController
     book_name = p[:book_id]
     b_id = Book.find_by_title(book_name).id
     result[:book_id] = b_id
+    result[:hold] = 0
     return result
   end
 end
