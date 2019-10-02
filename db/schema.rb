@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_01_071141) do
+ActiveRecord::Schema.define(version: 2019_10_02_062228) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -41,24 +41,20 @@ ActiveRecord::Schema.define(version: 2019_10_01_071141) do
   end
 
   create_table "borrow_histories", force: :cascade do |t|
-    t.integer "library_id", null: false
     t.integer "student_id", null: false
     t.integer "book_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_borrow_histories_on_book_id"
-    t.index ["library_id"], name: "index_borrow_histories_on_library_id"
     t.index ["student_id"], name: "index_borrow_histories_on_student_id"
   end
 
   create_table "hold_lists", force: :cascade do |t|
     t.integer "student_id", null: false
     t.integer "book_id", null: false
-    t.integer "library_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_hold_lists_on_book_id"
-    t.index ["library_id"], name: "index_hold_lists_on_library_id"
     t.index ["student_id"], name: "index_hold_lists_on_student_id"
   end
 
@@ -76,12 +72,10 @@ ActiveRecord::Schema.define(version: 2019_10_01_071141) do
   create_table "library_book_lists", force: :cascade do |t|
     t.integer "number"
     t.integer "book_id", null: false
-    t.integer "library_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "hold"
     t.index ["book_id"], name: "index_library_book_lists_on_book_id"
-    t.index ["library_id"], name: "index_library_book_lists_on_library_id"
   end
 
   create_table "student_current_borrow_lists", force: :cascade do |t|
@@ -117,27 +111,24 @@ ActiveRecord::Schema.define(version: 2019_10_01_071141) do
 
   create_table "wish_lists", force: :cascade do |t|
     t.integer "student_id", null: false
-    t.integer "book_id", null: false
+    t.integer "library_book_list_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_id"], name: "index_wish_lists_on_book_id"
+    t.index ["library_book_list_id"], name: "index_wish_lists_on_library_book_list_id"
     t.index ["student_id"], name: "index_wish_lists_on_student_id"
   end
 
   add_foreign_key "books", "libraries"
   add_foreign_key "books", "universities"
   add_foreign_key "borrow_histories", "books"
-  add_foreign_key "borrow_histories", "libraries"
   add_foreign_key "borrow_histories", "students"
   add_foreign_key "hold_lists", "books"
-  add_foreign_key "hold_lists", "libraries"
   add_foreign_key "hold_lists", "students"
   add_foreign_key "libraries", "universities"
   add_foreign_key "library_book_lists", "books"
-  add_foreign_key "library_book_lists", "libraries"
   add_foreign_key "student_current_borrow_lists", "books"
   add_foreign_key "student_current_borrow_lists", "students"
   add_foreign_key "students", "universities"
-  add_foreign_key "wish_lists", "books"
+  add_foreign_key "wish_lists", "library_book_lists"
   add_foreign_key "wish_lists", "students"
 end

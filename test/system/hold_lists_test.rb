@@ -15,7 +15,6 @@ class HoldListsTest < ApplicationSystemTestCase
     click_on "New Hold List"
 
     fill_in "Book", with: @hold_list.book_id
-    fill_in "Library", with: @hold_list.library_id
     fill_in "Student", with: @hold_list.student_id
     click_on "Create Hold list"
 
@@ -28,7 +27,6 @@ class HoldListsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Book", with: @hold_list.book_id
-    fill_in "Library", with: @hold_list.library_id
     fill_in "Student", with: @hold_list.student_id
     click_on "Update Hold list"
 

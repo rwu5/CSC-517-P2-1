@@ -17,12 +17,12 @@
 
 <p>
   <strong>University:</strong>
-  <%= University.find(Library.find(@book.library_id).university_id).name %>
+  <%= University.find(Library.find(@book.book_id).university_id).name %>
 </p>
 
 <p>
   <strong>Library:</strong>
-  <%= Library.find(@book.library_id).name %>
+  <%= Library.find(Book.find(@book.book_id).library_id).name %>
 </p>
 
 <p>

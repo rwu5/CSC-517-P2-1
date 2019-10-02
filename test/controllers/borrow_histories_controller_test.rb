@@ -17,7 +17,7 @@ class BorrowHistoriesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create borrow_history" do
     assert_difference('BorrowHistory.count') do
-      post borrow_histories_url, params: { borrow_history: { book_id: @borrow_history.book_id, library_id: @borrow_history.library_id, student_id: @borrow_history.student_id } }
+      post borrow_histories_url, params: { borrow_history: { book_id: @borrow_history.book_id, student_id: @borrow_history.student_id } }
     end
 
     assert_redirected_to borrow_history_url(BorrowHistory.last)
@@ -34,7 +34,7 @@ class BorrowHistoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update borrow_history" do
-    patch borrow_history_url(@borrow_history), params: { borrow_history: { book_id: @borrow_history.book_id, library_id: @borrow_history.library_id, student_id: @borrow_history.student_id } }
+    patch borrow_history_url(@borrow_history), params: { borrow_history: { book_id: @borrow_history.book_id, student_id: @borrow_history.student_id } }
     assert_redirected_to borrow_history_url(@borrow_history)
   end
 

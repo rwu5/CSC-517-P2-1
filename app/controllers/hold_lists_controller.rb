@@ -69,6 +69,6 @@ class HoldListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hold_list_params
-      params.require(:hold_list).permit(:student_id, :book_id, :library_id)
+      params.require(:hold_list).permit(:student_id, :book_id)
     end
 end

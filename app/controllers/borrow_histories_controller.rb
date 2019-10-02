@@ -69,6 +69,6 @@ class BorrowHistoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def borrow_history_params
-      params.require(:borrow_history).permit(:library_id, :student_id, :book_id)
+      params.require(:borrow_history).permit(:student_id, :book_id)
     end
 end

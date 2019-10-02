@@ -17,7 +17,7 @@ class HoldListsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create hold_list" do
     assert_difference('HoldList.count') do
-      post hold_lists_url, params: { hold_list: { book_id: @hold_list.book_id, library_id: @hold_list.library_id, student_id: @hold_list.student_id } }
+      post hold_lists_url, params: { hold_list: { book_id: @hold_list.book_id, student_id: @hold_list.student_id } }
     end
 
     assert_redirected_to hold_list_url(HoldList.last)
@@ -34,7 +34,7 @@ class HoldListsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update hold_list" do
-    patch hold_list_url(@hold_list), params: { hold_list: { book_id: @hold_list.book_id, library_id: @hold_list.library_id, student_id: @hold_list.student_id } }
+    patch hold_list_url(@hold_list), params: { hold_list: { book_id: @hold_list.book_id, student_id: @hold_list.student_id } }
     assert_redirected_to hold_list_url(@hold_list)
   end
 

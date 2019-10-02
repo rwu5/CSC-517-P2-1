@@ -2,8 +2,8 @@
 
 one:
   student: one
-  book: one
+  library_book_list: one
 
 two:
   student: two
-  book: two
+  library_book_list: two

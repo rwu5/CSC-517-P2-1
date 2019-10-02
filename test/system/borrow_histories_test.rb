@@ -15,7 +15,6 @@ class BorrowHistoriesTest < ApplicationSystemTestCase
     click_on "New Borrow History"
 
     fill_in "Book", with: @borrow_history.book_id
-    fill_in "Library", with: @borrow_history.library_id
     fill_in "Student", with: @borrow_history.student_id
     click_on "Create Borrow history"
 
@@ -28,7 +27,6 @@ class BorrowHistoriesTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Book", with: @borrow_history.book_id
-    fill_in "Library", with: @borrow_history.library_id
     fill_in "Student", with: @borrow_history.student_id
     click_on "Update Borrow history"
 

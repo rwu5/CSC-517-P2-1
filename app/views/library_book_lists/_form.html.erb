@@ -21,11 +21,6 @@
     <%= form.text_field :book_id %>
   </div>
 
-  <div class="field">
-    <%= form.label :library_id %>
-    <%= select("library_book_list", "library_id", Library.all.collect{ |c| [ c.name, c.id] }) %>
-  </div>
-
   <div class="actions">
     <%= form.submit %>
   </div>

@@ -14,7 +14,7 @@ class WishListsTest < ApplicationSystemTestCase
     visit wish_lists_url
     click_on "New Wish List"
 
-    fill_in "Book", with: @wish_list.book_id
+    fill_in "Library book list", with: @wish_list.library_book_list_id
     fill_in "Student", with: @wish_list.student_id
     click_on "Create Wish list"
 
@@ -26,7 +26,7 @@ class WishListsTest < ApplicationSystemTestCase
     visit wish_lists_url
     click_on "Edit", match: :first
 
-    fill_in "Book", with: @wish_list.book_id
+    fill_in "Library book list", with: @wish_list.library_book_list_id
     fill_in "Student", with: @wish_list.student_id
     click_on "Update Wish list"
 

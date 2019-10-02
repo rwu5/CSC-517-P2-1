@@ -11,13 +11,8 @@
 </p>
 
 <p>
-  <strong>Library:</strong>
-  <%= Library.find(@library_book_list.library_id).name %>
-</p>
-
-<p>
   <strong>University:</strong>
-  <%= University.find(Library.find(@library_book_list.library_id).university_id).name %>
+  <%= University.find(Book.find(@library_book_list.book_id).university_id).name %>
 </p>
 
 <%= link_to 'Edit', edit_library_book_list_path(@library_book_list) %> |
