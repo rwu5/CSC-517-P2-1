@@ -13,6 +13,13 @@
 |Ruiwen Wu    |rwu5         |
 |Yongjian Zhu |yzhu48       |
 
+# TODO
+* Librarian feature
+* Edit profile
+* Validation
+* Send Mail
+* Calculate fine
+* Test
 
 # Library Management 
 
