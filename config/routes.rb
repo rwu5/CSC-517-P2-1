@@ -21,5 +21,7 @@ Rails.application.routes.draw do
   get 's/books', to: 'student_page#show_books'
   get 's/books/:id', to: 'student_page#book_details'
 
+  post 's/books/:id', to: 'student_page#borrow'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

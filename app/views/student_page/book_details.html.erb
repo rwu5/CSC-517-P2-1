@@ -40,3 +40,5 @@
   <%= @book.hold %>
 </p>
 
+<%= link_to 'borrow', s_books_path + "/" + @book.id.to_s, method: :post %>
+
