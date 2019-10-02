@@ -24,8 +24,9 @@ Rails.application.routes.draw do
 
   post 's/wish_list/:id', to: 'student_page#add_to_wish_list'
   post 's/books/:id', to: 'student_page#borrow'
-
   delete 's/wish_list/:id', to: 'student_page#remove_from_wish_list'
 
+  get 's/current_borrowed_list', to: 'student_page#current_borrowed_list'
+  delete 's/current_borrowed_list/:id', to: 'student_page#return_book'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
