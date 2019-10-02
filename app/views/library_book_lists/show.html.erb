@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @library_book_list.number %>
+</p>
+
+<p>
+  <strong>Book:</strong>
+  <%= Book.find(@library_book_list.book_id).title %>
+</p>
+
+<p>
+  <strong>University:</strong>
+  <%= University.find(Book.find(@library_book_list.book_id).university_id).name %>
+</p>
+
+<%= link_to 'Edit', edit_library_book_list_path(@library_book_list) %> |
+<%= link_to 'Back', library_book_lists_path %>

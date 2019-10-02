@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @borrow_history.student_id %>
+</p>
+
+<p>
+  <strong>Book:</strong>
+  <%= @borrow_history.book_id %>
+</p>
+
+<%= link_to 'Edit', edit_borrow_history_path(@borrow_history) %> |
+<%= link_to 'Back', borrow_histories_path %>

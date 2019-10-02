@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<%= @book = @books.find(params[:id]) %>
+
+<strong>Book Image:</strong>
+
+<%#=image_tag @book.image.url(:medium) %>
+<p>
+  <strong>Isbn:</strong>
+  <%= Book.find(@book.book_id).isbn %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= Book.find(@book.book_id).title %>
+</p>
+
+<p>
+  <strong>University:</strong>
+  <%= University.find(Library.find(@book.book_id).university_id).name %>
+</p>
+
+<p>
+  <strong>Library:</strong>
+  <%= Library.find(Book.find(@book.book_id).library_id).name %>
+</p>
+
+<p>
+  <strong>Special collection:</strong>
+  <%= Book.find(@book.book_id).is_special_collection %>
+</p>
+
+<p>
+  <strong>Available number:</strong>
+  <%= @book.number %>
+</p>
+
+<p>
+  <strong>Hold request number:</strong>
+  <%= @book.hold %>
+</p>
+
+<%= link_to 'borrow', s_books_path + "/" + @book.id.to_s, method: :post %>
+

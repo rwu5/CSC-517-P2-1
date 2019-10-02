@@ -11,8 +11,11 @@
     <% if current_student %>
       <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
-          <li><%= link_to "Link1", "/path1" %></li>
-          <li><%= link_to "Link2", "/path2" %></li>
+          <li><%=current_student.university_id  %></li>
+          <li><%= link_to "Show All Libraries", "/s/libraries" %></li>
+          <li><%= link_to "Show All Books", "/s/books" %></li>
+          <li><%= link_to "My Wish List", "/s/wish_list", method: :get %></li>
+          <li><%= link_to "My Current Books", s_current_borrowed_list_path, method: :get %></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
@@ -29,6 +32,7 @@
           <li><%= link_to "University", universities_path, method: :get %></li>
           <li><%= link_to "Library", libraries_path, method: :get %></li>
           <li><%= link_to "Book", books_path, method: :get %></li>
+          <li><%= link_to "Book Stock", library_book_lists_path, method: :get %></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">

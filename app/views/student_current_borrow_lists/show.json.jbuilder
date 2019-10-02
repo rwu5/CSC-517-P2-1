@@ -1,0 +1,1 @@
+json.partial! "student_current_borrow_lists/student_current_borrow_list", student_current_borrow_list: @student_current_borrow_list
