@@ -21,6 +21,12 @@
 * Calculate fine
 * Test
 
+# Run the Library Management System
+* To run the project, go to https://still-taiga-41852.herokuapp.com and sign up as admin or student as the first time. (To test the function, we recomment you sign up as admin for the first time). Please fill in the name, 
+* After signing up as admin, you will be direct to the main page of the Library Management System. An admin is able to: 1) Create an university. 2) Create a library for an existing university. 3) Create a book for a library. 4) Add or delete book collections.
+* The creation of a student role needs information of email, name, password (and password confirmation), university (admin has to create this university first for students loging in), and education level. The same email address can be used for signing up for multiply roles. (eg. I am both admin and student)
+* Students on student page can view the created universities, libraries, his/her wish list, and current borrowed books. Students can borrow book by click "show all the book", and "details", and click "borrow". To return a book, go to "my current book", and click "return" on the right side of the shown book.
+
 # Library Management 
 
 You are tasked with creating a Library Management System
