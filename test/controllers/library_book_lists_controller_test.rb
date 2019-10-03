@@ -17,7 +17,7 @@ class LibraryBookListsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create library_book_list" do
     assert_difference('LibraryBookList.count') do
-      post library_book_lists_url, params: { library_book_list: { book_id: @library_book_list.book_id, library_id: @library_book_list.library_id, number: @library_book_list.number } }
+      post library_book_lists_url, params: { library_book_list: { book_id: @library_book_list.book_id, number: @library_book_list.number } }
     end
 
     assert_redirected_to library_book_list_url(LibraryBookList.last)
@@ -34,7 +34,7 @@ class LibraryBookListsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update library_book_list" do
-    patch library_book_list_url(@library_book_list), params: { library_book_list: { book_id: @library_book_list.book_id, library_id: @library_book_list.library_id, number: @library_book_list.number } }
+    patch library_book_list_url(@library_book_list), params: { library_book_list: { book_id: @library_book_list.book_id, number: @library_book_list.number } }
     assert_redirected_to library_book_list_url(@library_book_list)
   end
 

@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
+  resources :library_book_lists
   resources :wish_lists
   resources :borrow_histories
   resources :hold_lists
   resources :student_current_borrow_lists
-  resources :library_book_lists
   devise_for :admins, controllers: {
       registrations: 'admins/registrations',
       sessions: 'admins/sessions'
@@ -28,5 +28,8 @@ Rails.application.routes.draw do
 
   get 's/current_borrowed_list', to: 'student_page#current_borrowed_list'
   delete 's/current_borrowed_list/:id', to: 'student_page#return_book'
+
+  get 's/request_list', to: 'student_page#request_list'
+  delete 's/request_list/:id', to: 'student_page#remove_from_request_list'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

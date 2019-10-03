@@ -3,9 +3,7 @@
 one:
   number: 1
   book: one
-  library: one
 
 two:
   number: 1
   book: two
-  library: two

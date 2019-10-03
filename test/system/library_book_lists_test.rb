@@ -15,7 +15,6 @@ class LibraryBookListsTest < ApplicationSystemTestCase
     click_on "New Library Book List"
 
     fill_in "Book", with: @library_book_list.book_id
-    fill_in "Library", with: @library_book_list.library_id
     fill_in "Number", with: @library_book_list.number
     click_on "Create Library book list"
 
@@ -28,7 +27,6 @@ class LibraryBookListsTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Book", with: @library_book_list.book_id
-    fill_in "Library", with: @library_book_list.library_id
     fill_in "Number", with: @library_book_list.number
     click_on "Update Library book list"
 

@@ -23,8 +23,9 @@
       <td><%= Library.find(Book.find(LibraryBookList.find(w.library_book_list_id).book_id).library_id).name %></td>
       <td><%= Book.find(LibraryBookList.find(w.library_book_list_id).book_id).is_special_collection %></td>
       <td><%= LibraryBookList.find(w.library_book_list_id).number %></td>
-      <td><%= LibraryBookList.find(w.library_book_list_id).hold %></td>
-      <td><td><%= link_to 'delete', s_wish_list_path + "/" + w.id.to_s, method: :delete %></td></td>
+      <td><%= HoldList.where(book_id: LibraryBookList.find(w.library_book_list_id).book_id).size %></td>
+      <td><%= link_to 'delete', s_wish_list_path + "/" + w.id.to_s, method: :delete %></td>
+      <td><%= link_to 'borrow', s_books_path + "/" + (LibraryBookList.find(w.library_book_list_id).book_id).to_s, method: :post %></td>
     </tr>
   <% end %>
   </tbody>

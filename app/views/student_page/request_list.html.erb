@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Books</h1>
+<h1>Request List</h1>
 
 <table>
   <thead>
@@ -24,10 +22,9 @@
       <td><%= University.find(Book.find(book.book_id).university_id).name %></td>
       <td><%= Library.find(Book.find(book.book_id).library_id).name %></td>
       <td><%= Book.find(book.book_id).is_special_collection %></td>
-      <td><%= book.number %></td>
+      <td><%= LibraryBookList.find_by_book_id(book.book_id).number %></td>
       <td><%= HoldList.where(book_id: book.book_id).size %></td>
-      <td><%= link_to 'add to wish list', s_wish_list_path + "/" + book.id.to_s, method: :post %></td>
-      <td><%= link_to 'details', s_books_path + "/" + book.id.to_s, method: :get %></td></td>
+      <td><%= link_to 'delete request', s_request_list_path + "/" + book.id.to_s, method: :delete %></td>
     </tr>
   <% end %>
   </tbody>

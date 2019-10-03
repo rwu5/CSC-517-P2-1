@@ -37,7 +37,7 @@
 
 <p>
   <strong>Hold request number:</strong>
-  <%= @book.hold %>
+  <%= HoldList.where(book_id: @book.book_id).size %>
 </p>
 
 <%= link_to 'borrow', s_books_path + "/" + @book.id.to_s, method: :post %>

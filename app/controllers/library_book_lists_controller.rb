@@ -24,7 +24,7 @@ class LibraryBookListsController < ApplicationController
   # POST /library_book_lists
   # POST /library_book_lists.json
   def create
-    @library_book_list = LibraryBookList.new(get_params(library_book_list_params))
+    @library_book_list = LibraryBookList.new(library_book_list_params)
 
     respond_to do |format|
       if @library_book_list.save
@@ -62,23 +62,13 @@ class LibraryBookListsController < ApplicationController
   end
 
   private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_library_book_list
+      @library_book_list = LibraryBookList.find(params[:id])
+    end
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_library_book_list
-    @library_book_list = LibraryBookList.find(params[:id])
-  end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def library_book_list_params
-    params.require(:library_book_list).permit(:number, :book_id, :hold)
-  end
-
-  def get_params(p)
-    result = library_book_list_params
-    book_name = p[:book_id]
-    b_id = Book.find_by_title(book_name).id
-    result[:book_id] = b_id
-    result[:hold] = 0
-    return result
-  end
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def library_book_list_params
+      params.require(:library_book_list).permit(:number, :book_id)
+    end
 end
