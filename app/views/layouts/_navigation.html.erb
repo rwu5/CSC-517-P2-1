@@ -6,12 +6,11 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#">RubyP2</a>
+    <a class="navbar-brand" href="/">Library Management System</a>
     <!--    =================================================================-->
     <% if current_student %>
       <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
-          <li><%=current_student.university_id  %></li>
           <li><%= link_to "Show All Libraries", "/s/libraries" %></li>
           <li><%= link_to "Show All Books", "/s/books" %></li>
           <li><%= link_to "My Wish List", "/s/wish_list", method: :get %></li>
@@ -19,9 +18,9 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li>
-            <%= link_to("logout", destroy_student_session_path, method: :delete) %>
-          </li>
+          <li><%= link_to current_student.name, "/" %></li>
+          <li><%= link_to("logout", destroy_student_session_path, method: :delete) %></li>
+
         </ul>
       </div>
     <% end %>
@@ -36,6 +35,8 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
+
+          <li><%= link_to "Admin", "/" %></li>
           <li>
             <%= link_to("logout", destroy_admin_session_path, method: :delete) %>
           </li>

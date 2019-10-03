@@ -12,6 +12,19 @@ Rails.application.configure do
           s3_region: ENV.fetch('AWS_REGION'),
       }
   }
+
+  config.action_mailer.default_url_options = { host: "http://localhost:3000" }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+      :address => "smtp.gmail.com",
+      :domain=> "gmail.com",
+      :port => "587",
+      :authentication => "plain",
+      :user_name => "csc517team666@gmail.com",
+      :password => "csc517.team",
+      :enable_starttls_auto => true
+  }
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.

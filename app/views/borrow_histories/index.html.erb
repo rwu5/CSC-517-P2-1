@@ -2,23 +2,23 @@
 
 <h1>Borrow Histories</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Student</th>
-      <th>Book</th>
-      <th colspan="3"></th>
+      <th class="col text-center">Student</th>
+      <th class="col text-center">Book</th>
+      <th class="col text-center" colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @borrow_histories.each do |borrow_history| %>
       <tr>
-        <td><%= borrow_history.student_id %></td>
-        <td><%= borrow_history.book_id %></td>
-        <td><%= link_to 'Show', borrow_history %></td>
-        <td><%= link_to 'Edit', edit_borrow_history_path(borrow_history) %></td>
-        <td><%= link_to 'Destroy', borrow_history, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="text-center"><%= Student.find(borrow_history.student_id) %></td>
+        <td class="text-center"><%= Book.find(borrow_history.book_id) %></td>
+        <td class="text-center"><%= link_to 'Show', borrow_history %></td>
+        <td class="text-center"><%= link_to 'Edit', edit_borrow_history_path(borrow_history) %></td>
+        <td class="text-center"><%= link_to 'Destroy', borrow_history, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

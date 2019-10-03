@@ -34,6 +34,7 @@ class StudentPageController < ApplicationController
         @book.number = @book.number - 1
         @book.save()
         respond_to do |format|
+          StudentMailer.borrow_success(current_student.email).deliver_later
           format.html { redirect_to s_books_path + "/" + @book.id.to_s, notice: 'Borrow this book successfully' }
           format.json { head :no_content }
         end
