@@ -1,5 +1,5 @@
 class StudentMailer < ApplicationMailer
-  default from: 'postmaster@sandbox84d833d7a0294e9f875abf19412cc7fe.mailgun.org'
+  default from: 'csc517team666@gmail.com'
 
   def borrow_success(email)
     mail to: email,subject: 'Book borrowed successful!'

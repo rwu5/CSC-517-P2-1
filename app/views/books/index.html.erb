@@ -9,7 +9,7 @@
       <th class="col text-center">Title</th>
       <th class="col text-center">University</th>
       <th class="col text-center">Library</th>
-      <th class="col text-center">Is special collection</th>
+      <th class="col text-center">Special collection</th>
       <th class="col text-center" colspan="3"></th>
     </tr>
   </thead>
@@ -17,8 +17,8 @@
   <tbody>
     <% @books.each do |book| %>
       <tr>
-        <td class="text-center"><%= book.isbn %></td>
         <td class="text-center"><%= book.title %></td>
+        <td class="text-center"><%= book.isbn %></td>
         <td class="text-center"><%= University.find(book.university_id).name %></td>
         <td class="text-center"><%= Library.find(book.library_id).name %></td>
         <td class="text-center"><%= book.is_special_collection %></td>

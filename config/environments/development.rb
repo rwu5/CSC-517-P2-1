@@ -10,7 +10,7 @@ Rails.application.configure do
       :port => "587",
       :authentication => "plain",
       :user_name => "csc517team666@gmail.com",
-      :password => "csc517.team",
+      :password => "csc517team",
       :enable_starttls_auto => true
   }
   # In the development environment your application's code is reloaded on
