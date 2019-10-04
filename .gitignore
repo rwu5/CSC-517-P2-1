@@ -39,4 +39,3 @@ yarn.lock
 .idea
 .generators
 .rakeTasks
-Gemfile.lock
