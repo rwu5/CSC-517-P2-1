@@ -25,7 +25,7 @@
       <td class="text-center"><%= Library.find(Book.find(book.book_id).library_id).name %></td>
       <td class="text-center"><%= Book.find(book.book_id).is_special_collection %></td>
       <td class="text-center"><%= book.number %></td>
-      <td class="text-center"><%= book.hold %></td>
+      <td class="text-center"><%= HoldList.where(book_id: book.book_id).size %></td>
       <td class="text-center"><%= link_to 'Borrow', s_books_path + "/" + book.id.to_s, method: :post %></td>
       <td class="text-center"><%= link_to 'Add to wish list', s_wish_list_path + "/" + book.id.to_s, method: :post %></td>
       <td class="text-center"><%= link_to 'Details', s_books_path + "/" + book.id.to_s, method: :get %></td></td>
