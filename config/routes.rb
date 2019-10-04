@@ -31,5 +31,6 @@ Rails.application.routes.draw do
 
   get 's/request_list', to: 'student_page#request_list'
   delete 's/request_list/:id', to: 'student_page#remove_from_request_list'
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

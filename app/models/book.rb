@@ -3,5 +3,19 @@ class Book < ApplicationRecord
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
   belongs_to :university
   belongs_to :library
+
+  def self.search(search, a)
+      if !a.blank?
+        where(["isbn LIKE ?", "%#{a}%"])
+        if !search.blank?
+          where(["title LIKE ?","#{search}"])
+        end
+      elsif search
+        where(["title LIKE ?","%#{search}%"])
+      else
+        all
+      end
+  end
+
 end
 
