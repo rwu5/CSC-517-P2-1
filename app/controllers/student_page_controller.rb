@@ -10,7 +10,7 @@ class StudentPageController < ApplicationController
     @books = LibraryBookList.all
   end
 
-  def borrow
+  def borrow_book
     # TODO: see if reach max number in current borrow list
     book_stock = LibraryBookList.all.find(params[:id])
     is_special_collection = Book.find(book_stock.book_id).is_special_collection
@@ -25,7 +25,7 @@ class StudentPageController < ApplicationController
 
     if is_special_collection == 1
       book_stock = LibraryBookList.all.find(params[:id])
-      HoldList.new(student_id: current_student.id, book_id: book_stock.book_id).save()
+      HoldList.new(student_id: current_student.id, book_id: book_stock.book_id).save
       respond_to do |format|
         format.html { redirect_to s_books_path + "/" + book_stock.id.to_s, notice: 'Hold Request Successfully Created' }
         format.json { head :no_content }
@@ -37,8 +37,8 @@ class StudentPageController < ApplicationController
       @book_stock = LibraryBookList.all.find(params[:id])
       book_stock_number = @book_stock.number
       if book_stock_number > 0
-        BorrowHistory.new(student_id: current_student.id, book_id: @book_stock.book_id).save()
-        StudentCurrentBorrowList.new(student_id: current_student.id, book_id: @book_stock.book_id).save()
+        BorrowHistory.new(student_id: current_student.id, book_id: @book_stock.book_id).save
+        StudentCurrentBorrowList.new(student_id: current_student.id, book_id: @book_stock.book_id).save
         @book_stock.number -= 1
         @book_stock.save()
         respond_to do |format|
@@ -47,45 +47,50 @@ class StudentPageController < ApplicationController
         end
 
       elsif book_stock_number == 0
-        HoldList.new(student_id: current_student.id, book_id: @book_stock.book_id).save()
+        HoldList.new(student_id: current_student.id, book_id: @book_stock.book_id).save
         respond_to do |format|
           format.html { redirect_to s_books_path + "/" + @book_stock.id.to_s, notice: 'Create Hold Request' }
           format.json { head :no_content }
         end
       end
+
     end
+
   end
 
 
   def return_book
     @this_book_log = StudentCurrentBorrowList.find(params[:id])
-    @library_book_list = LibraryBookList.where(book_id: @this_book_log.book_id).first
-    @library_book_list.number += 1
-    @library_book_list.save()
+    @book_stock = LibraryBookList.where(book_id: @this_book_log.book_id).first
+    @book_stock.number += 1
+    @book_stock.save()
     @this_book_log.destroy
     #   TODO: calculate fine in the view
 
-    is_special_collection = Book.find(@library_book_list.book_id).is_special_collection
-    if is_special_collection == 0
-      if @library_book_list.hold > 0
-        hold_students = HoldList.where(book_id: @library_book_list.book_id).order('created_at DESC')
-        hold_students do |h|
-          student = Student.find(h.student_id)
-          @student_borrowed_list = StudentCurrentBorrowList.where(student_id: student.id)
-          # this student reach max borrow number, change 2 later
-          if @student_borrowed_list.size > 2
-            next
-          elsif @student_borrowed_list.size <= 2
-            @new_student_borrowed_list = StudentCurrentBorrowList.new(student_id: h.student_id, book_id: h.book_id)
-            @new_student_borrowed_list.save
-            @new_borrow_history = BorrowHistory.new(student_id: h.student_id, book_id: h.book_id)
-            @new_borrow_history.save
-            #   TODO: email this student
-            @library_book_list.number -= 1
-            @library_book_list.hold -= 1
-            @library_book_list.save()
-            h.destroy
-          end
+    is_special_collection = Book.find(@book_stock.book_id).is_special_collection
+    if is_special_collection == 1
+      respond_to do |format|
+        format.html { redirect_to s_books_path + "/" + @library_book_list.id.to_s, notice: 'Return successfully' }
+        format.json { head :no_content }
+      end
+      return 1
+    end
+
+    book_hold_list = HoldList.where(book_id: @book_stock.book_id).order('created_at DESC')
+    if book_hold_list.size > 0
+       book_hold_list do |h|
+        student = Student.find(h.student_id)
+        @student_borrowed_list = StudentCurrentBorrowList.where(student_id: student.id)
+        # this student reach max borrow number, change 2 later
+        if @student_borrowed_list.size > 2
+          next
+        else
+          StudentCurrentBorrowList.new(student_id: h.student_id, book_id: h.book_id).save
+          BorrowHistory.new(student_id: h.student_id, book_id: h.book_id).save
+          #   TODO: email this student
+          @book_stock.number -= 1
+          @book_stock.save
+          h.destroy
         end
       end
     end
@@ -96,34 +101,23 @@ class StudentPageController < ApplicationController
       #   check if this book is available
       available_num = LibraryBookList.where(book_id: c.book_id).number
       if available_num > 0
-        LibraryBookList.where(book_id: c.book_id).number -= 1
-        @borrow_history = BorrowHistory.new(student_id: current_student.id, book_id: c.book_id)
-        @borrow_history.save()
-        @current_borrow = StudentCurrentBorrowList.new(student_id: current_student.id, book_id: c.book_id)
+        StudentCurrentBorrowList.new(student_id: current_student.id, book_id: c.book_id).save
+        BorrowHistory.new(student_id: current_student.id, book_id: c.book_id).save
+        @book_stock.number -= 1
+        @book_stock.save
       end
     end
 
     respond_to do |format|
-      format.html { redirect_to s_books_path + "/" + @library_book_list.id.to_s, notice: 'Return successfully' }
+      format.html { redirect_to s_current_borrowed_list_path, notice: 'Return successfully' }
       format.json { head :no_content }
     end
 
-  end
-
-
-  def add_hold_request(id)
-    book = LibraryBookList.all.find(id)
-    @hold_request = HoldList.new(student_id: current_student.id, book_id: book.book_id)
-    @hold_request.save()
-    respond_to do |format|
-      format.html { redirect_to s_books_path + "/" + book.id.to_s, notice: 'Hold Request Successfully Created' }
-      format.json { head :no_content }
-    end
   end
 
   def add_to_wish_list
     @wish_list = WishList.new(student_id: current_student.id, library_book_list_id: params[:id])
-    @wish_list.save()
+    @wish_list.save
   end
 
   def wish_list
@@ -155,4 +149,5 @@ class StudentPageController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end

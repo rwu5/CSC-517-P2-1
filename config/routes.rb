@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get 's/wish_list', to: 'student_page#wish_list'
 
   post 's/wish_list/:id', to: 'student_page#add_to_wish_list'
-  post 's/books/:id', to: 'student_page#borrow'
+  post 's/books/:id', to: 'student_page#borrow_book'
   delete 's/wish_list/:id', to: 'student_page#remove_from_wish_list'
 
   get 's/current_borrowed_list', to: 'student_page#current_borrowed_list'
