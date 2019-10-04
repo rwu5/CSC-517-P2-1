@@ -7,6 +7,7 @@
     <tr>
       <th class="col text-center">Student</th>
       <th class="col text-center">Book</th>
+      <th class="col text-center">Overdue Fine</th>
       <th class="col text-center" colspan="3"></th>
     </tr>
   </thead>
@@ -14,8 +15,11 @@
   <tbody>
     <% @borrow_histories.each do |borrow_history| %>
       <tr>
-        <td class="text-center"><%= Student.find(borrow_history.student_id) %></td>
-        <td class="text-center"><%= Book.find(borrow_history.book_id) %></td>
+        <td class="text-center"><%= Student.find(borrow_history.student_id).name %></td>
+        <td class="text-center"><%= Book.find(borrow_history.book_id).title %></td>
+        <% b = (Time.now - borrow_history.created_at - Library.find(Book.find(borrow_history.book_id).library_id).max_day_can_borrow*86400) %>
+        <% if b > 0; b = b.ceil * Library.find(Book.find(borrow_history.book_id).library_id).overdue_fine; else; b=0;end%>
+        <td class="text-center"><%= b %></td>
         <td class="text-center"><%= link_to 'Show', borrow_history %></td>
         <td class="text-center"><%= link_to 'Edit', edit_borrow_history_path(borrow_history) %></td>
         <td class="text-center"><%= link_to 'Destroy', borrow_history, method: :delete, data: { confirm: 'Are you sure?' } %></td>
