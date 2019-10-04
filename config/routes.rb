@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :library_book_lists
   resources :wish_lists
+  resources :library_book_lists
   resources :borrow_histories
   resources :hold_lists
   resources :student_current_borrow_lists
