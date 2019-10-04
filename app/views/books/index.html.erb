@@ -5,6 +5,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th class="col text-center">ID</th>
       <th class="col text-center">Isbn</th>
       <th class="col text-center">Title</th>
       <th class="col text-center">University</th>
@@ -17,11 +18,13 @@
   <tbody>
     <% @books.each do |book| %>
       <tr>
+        <td class="text-center"><%= book.id %></td>
         <td class="text-center"><%= book.title %></td>
         <td class="text-center"><%= book.isbn %></td>
         <td class="text-center"><%= University.find(book.university_id).name %></td>
         <td class="text-center"><%= Library.find(book.library_id).name %></td>
         <td class="text-center"><%= book.is_special_collection %></td>
+        <td class="text-center"><%= link_to 'Update stock', book %></td>
         <td class="text-center"><%= link_to 'Show', book %></td>
         <td class="text-center"><%= link_to 'Edit', edit_book_path(book) %></td>
         <td class="text-center"><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>

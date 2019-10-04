@@ -19,7 +19,7 @@
         <td class="text-center"><%= library_book_list.number %></td>
         <td class="text-center"><%= Book.find(library_book_list.book_id).title %></td>
         <td class="text-center"><%= Library.find(Book.find(library_book_list.book_id).library_id).name %></td>
-        <td class="text-center"><%= library_book_list.hold %></td>
+        <td class="text-center"><%= HoldList.where(book_id: library_book_list.book_id).size %></td>
         <td class="text-center"><%= link_to 'Show', library_book_list %></td>
         <td class="text-center"><%= link_to 'Edit', edit_library_book_list_path(library_book_list) %></td>
         <td class="text-center"><%= link_to 'Destroy', library_book_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>

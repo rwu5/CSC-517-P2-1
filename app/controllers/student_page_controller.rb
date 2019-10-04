@@ -15,7 +15,8 @@ class StudentPageController < ApplicationController
     book_stock = LibraryBookList.all.find(params[:id])
     is_special_collection = Book.find(book_stock.book_id).is_special_collection
     @my_borrowed_list = StudentCurrentBorrowList.where(student_id: current_student.id)
-    if @my_borrowed_list.size >= 3
+    # TODO: change number
+    if @my_borrowed_list.size >= current_student.education_level * 2
       respond_to do |format|
         format.html { redirect_to s_books_path + "/" + book_stock.id.to_s, notice: 'Max number reached' }
         format.json { head :no_content }
@@ -42,6 +43,7 @@ class StudentPageController < ApplicationController
         @book_stock.number -= 1
         @book_stock.save()
         respond_to do |format|
+          StudentMailer.borrow_success(current_student.email).deliver_later
           format.html { redirect_to s_books_path + "/" + @book_stock.id.to_s, notice: 'Borrow this book successfully' }
           format.json { head :no_content }
         end
