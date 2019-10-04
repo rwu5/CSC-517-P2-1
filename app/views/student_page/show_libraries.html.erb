@@ -2,26 +2,26 @@
 
 <h1>Libraries</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
   <tr>
-    <th>Name</th>
-    <th>University</th>
-    <th>Location</th>
-    <th>Max day can borrow</th>
-    <th>Overdue fine</th>
-    <th colspan="3"></th>
+    <th class="col text-center">Name</th>
+    <th class="col text-center">University</th>
+    <th class="col text-center">Location</th>
+    <th class="col text-center">Max day can borrow</th>
+    <th class="col text-center">Overdue fine</th>
+    <th class="col text-center" colspan="3"></th>
   </tr>
   </thead>
 
   <tbody>
   <% Student.show_library.each do |library| %>
     <tr>
-      <td><%= library.name %></td>
-      <td><%= University.find(library.university_id).name %></td>
-      <td><%= library.location %></td>
-      <td><%= library.max_day_can_borrow %></td>
-      <td><%= library.overdue_fine %></td>
+      <td class=" text-center"><%= library.name %></td>
+      <td class=" text-center"><%= University.find(library.university_id).name %></td>
+      <td class="text-center"><%= library.location %></td>
+      <td class="text-center"><%= library.max_day_can_borrow %></td>
+      <td class="text-center"><%= library.overdue_fine %></td>
     </tr>
   <% end %>
   </tbody>
