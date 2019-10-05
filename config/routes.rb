@@ -15,6 +15,10 @@ Rails.application.routes.draw do
       registrations: 'students/registrations',
       sessions: 'students/sessions'
   }
+
+  scope "/admin_page" do
+    resources :students
+  end
   root to: 'home#index'
 
   get 's/libraries', to: 'student_page#show_libraries'
@@ -31,5 +35,7 @@ Rails.application.routes.draw do
 
   get 's/request_list', to: 'student_page#request_list'
   delete 's/request_list/:id', to: 'student_page#remove_from_request_list'
+
+  get 'a/show_all_students', to: 'admin_page#show_all_students'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
