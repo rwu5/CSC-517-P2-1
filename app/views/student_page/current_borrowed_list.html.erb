@@ -1,7 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Current borrowed Books</h1>
-
 <table class="table table-striped">
   <thead>
   <tr>
@@ -10,6 +9,7 @@
     <th class="col text-center">University</th>
     <th class="col text-center">Library</th>
     <th class="col text-center">Is special collection</th>
+    <th class="col text-center">Overdue Fine</th>
     <th class="col text-center" colspan="3"></th>
   </tr>
   </thead>
@@ -22,6 +22,9 @@
       <td class="text-center"><%= University.find(Book.find(l.book_id).university_id).name %></td>
       <td class="text-center"><%= Library.find(Book.find(l.book_id).library_id).name %></td>
       <td class="text-center"><%= Book.find(l.book_id).is_special_collection %></td>
+      <% b = (Time.now - l.created_at - Library.find(Book.find(l.book_id).library_id).max_day_can_borrow*86400) %>
+      <% if b > 0; b = b.ceil * Library.find(Book.find(l.book_id).library_id).overdue_fine; else; b=0;end%>
+      <td class="text-center"><%= b %></td>
       <td class="text-center"><%= link_to 'return book',  s_current_borrowed_list_path + "/" + l.id.to_s, method: :delete %></td>
     </tr>
   <% end %>

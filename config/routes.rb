@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :wish_lists
   resources :library_book_lists
+  resources :wish_lists
   resources :borrow_histories
   resources :hold_lists
   resources :student_current_borrow_lists
@@ -16,9 +16,10 @@ Rails.application.routes.draw do
       sessions: 'students/sessions'
   }
 
-  scope "/admin_page" do
+  scope "/admin" do
     resources :students
   end
+
   root to: 'home#index'
 
   get 's/libraries', to: 'student_page#show_libraries'
@@ -35,7 +36,5 @@ Rails.application.routes.draw do
 
   get 's/request_list', to: 'student_page#request_list'
   delete 's/request_list/:id', to: 'student_page#remove_from_request_list'
-
-  get 'a/show_all_students', to: 'admin_page#show_all_students'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
