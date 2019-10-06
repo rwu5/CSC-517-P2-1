@@ -1,29 +1,38 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Hold Lists</h1>
+<h1>Hold Requests</h1>
 
 <table class="table table-striped">
   <thead>
-    <tr>
-      <th class="col text-center">Student</th>
-      <th class="col text-center">Book</th>
-      <th class="col text-center" colspan="3"></th>
-    </tr>
+  <tr>
+    <th class="col text-center">Student</th>
+    <th class="col text-center">Book</th>
+    <th class="col text-center">Available Number</th>
+    <th class="col text-center" colspan="3"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @hold_lists.each do |hold_list| %>
+  <% @hold_lists.each do |hold_list| %>
+    <% if librarian_signed_in? %>
+      <% if Book.find(hold_list.book_id).library_id == current_librarian.library_id %>
+        <tr>
+          <td class="text-center"><%= Student.find(hold_list.student_id).name %></td>
+          <td class="text-center"><%= Book.find(hold_list.book_id).title %></td>
+          <td class="text-center"><%= LibraryBookList.find_by_book_id(hold_list.book_id).number%></td>
+          <td class="text-center"><%= link_to 'Approve', "l/approve_hold_request/" + hold_list.id.to_s, method: :post %></td>
+          <td class="text-center"><%= link_to 'Deny', "/l/deny_hold_request/" + hold_list.id.to_s, method: :post %></td>
+        </tr>
+      <% end %>
+    <% else %>
       <tr>
         <td class="text-center"><%= Student.find(hold_list.student_id).name %></td>
-        <td class="text-center"><%= Book.find(hold_list.book_id).name %></td>
-        <td class="text-center"><%= link_to 'Show', hold_list %></td>
-        <td class="text-center"><%= link_to 'Edit', edit_hold_list_path(hold_list) %></td>
-        <td class="text-center"><%= link_to 'Destroy', hold_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="text-center"><%= Book.find(hold_list.book_id).title %></td>
+        <td class="text-center"><%= link_to 'Approve', "l/approve_hold_request/" + hold_list.id.to_s, method: :post %></td>
+        <td class="text-center"><%= link_to 'Deny', "/l/deny_hold_request/" + hold_list.id.to_s, method: :post %></td>
       </tr>
     <% end %>
+
+  <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Hold List', new_hold_list_path %>

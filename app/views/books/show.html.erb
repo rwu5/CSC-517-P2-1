@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <strong>Book Image:</strong>
-  <%=image_tag @book.image.url(:medium) %>
+<%= image_tag @book.image.url(:medium) %>
 <p>
   <strong>Isbn:</strong>
   <%= @book.isbn %>
@@ -25,6 +25,38 @@
   <strong>Is special collection:</strong>
   <%= @book.is_special_collection %>
 </p>
+
+<% if librarian_signed_in? || admin_signed_in? %>
+  <br>
+  <strong>Borrowed History:</strong>
+  <% @bhs = BorrowHistory.where(book_id: @book.id) %>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th class="col text-center">Student Id</th>
+      <th class="col text-center">Time</th>
+      <th class="col text-center" colspan="3"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @bhs.each do |bh| %>
+      <tr>
+        <td class="text-center"><%= Student.find(bh.student_id).name %></td>
+        <td class="text-center"><%= bh.created_at %></td>
+    <% end %>
+    </tr>
+    </tbody>
+  </table>
+
+
+
+
+
+
+
+<% end %>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>

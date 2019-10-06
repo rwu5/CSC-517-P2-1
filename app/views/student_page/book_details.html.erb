@@ -17,7 +17,7 @@
 
 <p>
   <strong>University:</strong>
-  <%= University.find(Library.find(@book.book_id).university_id).name %>
+  <%= University.find(Book.find(@book.book_id).university_id).name %>
 </p>
 
 <p>

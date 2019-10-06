@@ -72,7 +72,7 @@ class StudentPageController < ApplicationController
     is_special_collection = Book.find(@book_stock.book_id).is_special_collection
     if is_special_collection == 1
       respond_to do |format|
-        format.html { redirect_to s_books_path + "/" + @library_book_list.id.to_s, notice: 'Return successfully' }
+        format.html { redirect_to "/s/current_borrowed_list", notice: 'Return successfully' }
         format.json { head :no_content }
       end
       return 1

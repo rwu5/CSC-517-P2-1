@@ -45,8 +45,10 @@ Rails.application.routes.draw do
   get 's/request_list', to: 'student_page#request_list'
   delete 's/request_list/:id', to: 'student_page#remove_from_request_list'
 
-
   get 'a/approve_librarian/:id', to: 'admin_page#approve_librarian'
   delete 'a/deny_librarian/:id', to: 'admin_page#deny_librarian'
+
+  post 'l/approve_hold_request/:id', to: 'hold_lists#approve_hold_request'
+  post 'l/deny_hold_request/:id', to: 'hold_lists#deny_hold_request'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
