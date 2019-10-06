@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.search(params[:search], params[:searcha])
+    @books = Book.all
   end
 
   # GET /books/1
@@ -24,8 +24,11 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = Book.new(book_params)
-
+    if current_librarian
+      @book = Book.new(librarian_book_params(book_params))
+    else
+      @book = Book.new(book_params)
+    end
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
@@ -62,13 +65,21 @@ class BooksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_book
-      @book = Book.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def book_params
-      params.require(:book).permit(:isbn, :title, :is_special_collection, :university_id, :library_id, :image)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_book
+    @book = Book.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def book_params
+    params.require(:book).permit(:isbn, :title, :is_special_collection, :university_id, :library_id, :image)
+  end
+
+  def librarian_book_params(book_params)
+    new_params = book_params
+    new_params[:university_id] = Library.find(current_librarian.library_id).university_id
+    new_params[:library_id] = current_librarian.library_id
+    new_params
+  end
 end

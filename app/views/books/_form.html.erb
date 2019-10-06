@@ -21,29 +21,21 @@
     <%= form.text_field :title %>
   </div>
 
-  <div class="field">
-    <%= form.label :university_id %>
-    <%= form.collection_select :university_id, University.order(:name), :id, :name, include_blank: true %>
-  </div>
+  <% if !current_librarian %>
+    <div class="field">
+      <%= form.label :university_id %>
+      <%= form.collection_select :university_id, University.order(:name), :id, :name, include_blank: true %>
+    </div>
+
+    <div class="field">
+      <%= form.label :library_id %>
+      <%= form.grouped_collection_select :library_id, University.order(:name), :libraries, :name, :id, :name, include_blank: true %>
+    </div>
+  <% end %>
 
   <div class="field">
-    <%= form.label :library_id %>
-    <%= form.grouped_collection_select :library_id, University.order(:name), :libraries, :name, :id, :name, include_blank: true %>
-  </div>
-
-
-
-  <%#= form.number_field :is_special_collection %>
-
-<!--  <div class="field">-->
-    <%#= form.label :is_special_collection %>
-    <%#= radio_button("book", "is_special_collection", 1) %>
-    <%#= radio_button("book", "is_special_collection", 0) %>
-<!--  </div>-->
-
-  <div class="field">
-    <%= form.label :is_special_collection %><br />
-    <%= form.label :is_special_collection, "Yes", :value => 1  %>
+    <%= form.label :is_special_collection %><br/>
+    <%= form.label :is_special_collection, "Yes", :value => 1 %>
     <%= form.radio_button :is_special_collection, 1 %>
     <%= form.label :is_special_collection, "No", :value => 0 %>
     <%= form.radio_button :is_special_collection, 0 %>
