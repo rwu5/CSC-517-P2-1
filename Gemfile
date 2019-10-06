@@ -8,6 +8,7 @@ gem 'rails', '~> 6.0.0'
 gem "paperclip", "~> 6.0.0"
 gem 'aws-sdk', '~> 3'
 gem 'devise'
+gem 'isbn_validation'
 gem 'twitter-bootstrap-rails'
 gem 'devise-bootstrap-views'
 gem 'jquery-rails'
