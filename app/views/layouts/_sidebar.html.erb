@@ -1,11 +1,29 @@
 <div class="col-lg-3">
   <div class="well sidebar-nav" style="padding: 0 18px 5px 18px">
-    <h3>Sidebar</h3>
-    <ul class="nav nav-list">
-      <li class="nav-header">Sidebar</li>
-      <li><%= link_to "Show all students", students_path, method: :get %></li>
-      <li><%= link_to "Link2", "/path2" %></li>
-      <li><%= link_to "Link3", "/path3" %></li>
-    </ul>
+    <% if current_admin %>
+      <h3>Admin</h3>
+      <ul class="nav nav-list">
+        <li><%= link_to "Show all students", students_path, method: :get %></li>
+        <li><%= link_to "Show all librarians", librarians_path %></li>
+        <li><%= link_to "Edit my profile", "/path3" %></li>
+      </ul>
+    <% end %>
+
+    <% if current_librarian %>
+      <h3>Admin</h3>
+      <ul class="nav nav-list">
+        <li><%= link_to "Edit my profile", "/path3" %></li>
+      </ul>
+    <% end %>
+
+    <% if current_student %>
+      <h3>Admin</h3>
+      <ul class="nav nav-list">
+        <li><%= link_to "Show all students", students_path, method: :get %></li>
+        <li><%= link_to "Show all librarians", librarians_path %></li>
+        <li><%= link_to "Edit my profile", "/path3" %></li>
+      </ul>
+    <% end %>
+
   </div><!--/.well -->
 </div><!--/span-->
