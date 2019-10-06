@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :librarians
+  devise_for :librarians, controllers: {
+      registrations: 'librarians/registrations',
+      sessions: 'librarians/sessions'
+  }
   resources :library_book_lists
   resources :wish_lists
   resources :borrow_histories
@@ -21,6 +24,10 @@ Rails.application.routes.draw do
     resources :students
   end
 
+  scope "/admin" do
+    resources :librarians
+  end
+
   root to: 'home#index'
 
   get 's/libraries', to: 'student_page#show_libraries'
@@ -37,5 +44,9 @@ Rails.application.routes.draw do
 
   get 's/request_list', to: 'student_page#request_list'
   delete 's/request_list/:id', to: 'student_page#remove_from_request_list'
+
+
+  get 'a/approve_librarian/:id', to: 'admin_page#approve_librarian'
+  delete 'a/deny_librarian/:id', to: 'admin_page#deny_librarian'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

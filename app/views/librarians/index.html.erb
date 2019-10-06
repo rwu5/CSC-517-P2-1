@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Librarians</h1>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th class="col text-center">ID</th>
+    <th class="col text-center">Email</th>
+    <th class="col text-center">Name</th>
+    <th class="col text-center">Library</th>
+    <th class="col text-center" colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @librarians.each do |librarian| %>
+    <tr>
+      <td class="text-center"><%= librarian.id %></td>
+      <td class="text-center"><%= librarian.email %></td>
+      <td class="text-center"><%= librarian.name %></td>
+      <td class="text-center"><%= Library.find(librarian.library_id).name %></td>
+      <% if librarian.is_approved == nil %>
+        <td><%= link_to "Approve", '/a/approve_librarian/' + librarian.id.to_s, method: :get %></td>
+        <td><%= link_to "Deny", '/a/deny_librarian/' + librarian.id.to_s, method: :delete %></td>
+      <% else %>
+        <td><%= link_to "destroy", '/a/deny_librarian/' + librarian.id.to_s, method: :delete %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<td>Add Librarian: Please log out and sign up as librarian</td>
+<br>
+
