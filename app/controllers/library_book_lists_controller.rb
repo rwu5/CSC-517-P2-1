@@ -42,7 +42,7 @@ class LibraryBookListsController < ApplicationController
   def update
     respond_to do |format|
       if @library_book_list.update(library_book_list_params)
-        format.html { redirect_to @library_book_list, notice: 'Library book list was successfully updated.' }
+        format.html { redirect_to books_path, notice: 'Library book list was successfully updated.' }
         format.json { render :show, status: :ok, location: @library_book_list }
       else
         format.html { render :edit }
@@ -56,19 +56,20 @@ class LibraryBookListsController < ApplicationController
   def destroy
     @library_book_list.destroy
     respond_to do |format|
-      format.html { redirect_to library_book_lists_url, notice: 'Library book list was successfully destroyed.' }
+      format.html { redirect_to books_path, notice: 'Library book list was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_library_book_list
-      @library_book_list = LibraryBookList.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def library_book_list_params
-      params.require(:library_book_list).permit(:number, :book_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_library_book_list
+    @library_book_list = LibraryBookList.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def library_book_list_params
+    params.require(:library_book_list).permit(:number, :book_id)
+  end
 end

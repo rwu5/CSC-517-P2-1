@@ -31,6 +31,8 @@ class BooksController < ApplicationController
     end
     respond_to do |format|
       if @book.save
+        @library_book_list = LibraryBookList.new(book_id: @book.id, number: 0)
+        @library_book_list.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
