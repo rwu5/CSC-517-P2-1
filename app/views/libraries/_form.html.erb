@@ -16,10 +16,12 @@
     <%= form.text_field :name %>
   </div>
 
-  <div class="field">
-    <%= form.label :university_id %>
-    <%= select("library", "university_id", University.all.collect{ |c| [ c.name, c.id] }) %>
-  </div>
+  <% if current_admin %>
+    <div class="field">
+      <%= form.label :university_id %>
+      <%= select("library", "university_id", University.all.collect { |c| [c.name, c.id] }) %>
+    </div>
+  <% end %>
 
   <div class="field">
     <%= form.label :location %>

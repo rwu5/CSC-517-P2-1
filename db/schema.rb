@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_02_063252) do
+ActiveRecord::Schema.define(version: 2019_10_06_001936) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -58,6 +58,22 @@ ActiveRecord::Schema.define(version: 2019_10_02_063252) do
     t.index ["student_id"], name: "index_hold_lists_on_student_id"
   end
 
+  create_table "librarians", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "is_approved"
+    t.string "name"
+    t.integer "library_id"
+    t.index ["email"], name: "index_librarians_on_email", unique: true
+    t.index ["library_id"], name: "index_librarians_on_library_id"
+    t.index ["reset_password_token"], name: "index_librarians_on_reset_password_token", unique: true
+  end
+
   create_table "libraries", force: :cascade do |t|
     t.string "name"
     t.string "location"
@@ -74,7 +90,6 @@ ActiveRecord::Schema.define(version: 2019_10_02_063252) do
     t.integer "book_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "hold"
     t.index ["book_id"], name: "index_library_book_lists_on_book_id"
   end
 
@@ -124,6 +139,7 @@ ActiveRecord::Schema.define(version: 2019_10_02_063252) do
   add_foreign_key "borrow_histories", "students"
   add_foreign_key "hold_lists", "books"
   add_foreign_key "hold_lists", "students"
+  add_foreign_key "librarians", "libraries"
   add_foreign_key "libraries", "universities"
   add_foreign_key "library_book_lists", "books"
   add_foreign_key "student_current_borrow_lists", "books"
