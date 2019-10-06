@@ -1,8 +1,14 @@
 
 <h1>Books</h1>
 <%= form_tag books_path, :method => 'get' do %>
-  <%= text_field_tag :search, params[:search] %>
-  <%= text_field_tag :searcha, params[:searcha] %>
+  <p>Search Title</p>
+  <%= text_field_tag :search_title, params[:search_title] %>
+  <p>Search ISBN</p>
+  <%= text_field_tag :search_isbn, params[:search_isbn] %>
+  <p>Search University</p>
+  <%= text_field_tag :search_Univ, params[:search_Univ] %>
+  <p>Search Library</p>
+  <%= text_field_tag :search_Library, params[:search_Library] %>
   <%= submit_tag "Search" %>
 <% end %>
 
@@ -20,32 +26,32 @@
   </thead>
 
   <tbody>
-  <% @books.each do |book| %>
-    <tr>
-      <td class="text-center"><%= book.title %></td>
-      <td class="text-center"><%= book.isbn %></td>
-      <td class="text-center"><%= University.find(book.university_id).name %></td>
-      <td class="text-center"><%= Library.find(book.library_id).name %></td>
-      <td class="text-center"><%= LibraryBookList.find_by_book_id(book.id).number %></td>
-      <td class="text-center"><%= book.is_special_collection %></td>
-      <% if librarian_signed_in? %>
-        <% if current_librarian.library_id == book.library_id %>
-          <td class="text-center"><%= link_to 'Update stock', "/library_book_lists/" +
+    <% @books.each do |book| %>
+      <tr>
+        <td class="text-center"><%= book.title %></td>
+        <td class="text-center"><%= book.isbn %></td>
+        <td class="text-center"><%= University.find(book.university_id).name %></td>
+        <td class="text-center"><%= Library.find(book.library_id).name %></td>
+        <td class="text-center"><%= LibraryBookList.find_by_book_id(book.id).number %></td>
+        <td class="text-center"><%= book.is_special_collection %></td>
+        <% if librarian_signed_in? %>
+          <% if current_librarian.library_id == book.library_id %>
+            <td class="text-center"><%= link_to 'Update stock', "/library_book_lists/" +
               LibraryBookList.find_by_book_id(book.id).id.to_s + "/edit", method: :get %></td>
+            <td class="text-center"><%= link_to 'Show', book %></td>
+            <td class="text-center"><%= link_to 'Edit', edit_book_path(book) %></td>
+            <td class="text-center"><%= link_to 'Destroy', book, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+          <% end %>
+        <% else %>
+          <td class="text-center"><%= link_to 'Update stock', "/library_book_lists/" +
+            LibraryBookList.find_by_book_id(book.id).id.to_s + "/edit", method: :get %></td>
           <td class="text-center"><%= link_to 'Show', book %></td>
           <td class="text-center"><%= link_to 'Edit', edit_book_path(book) %></td>
           <td class="text-center"><%= link_to 'Destroy', book, method: :delete, data: {confirm: 'Are you sure?'} %></td>
         <% end %>
-      <% else %>
-        <td class="text-center"><%= link_to 'Update stock', "/library_book_lists/" +
-            LibraryBookList.find_by_book_id(book.id).id.to_s + "/edit", method: :get %></td>
-        <td class="text-center"><%= link_to 'Show', book %></td>
-        <td class="text-center"><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td class="text-center"><%= link_to 'Destroy', book, method: :delete, data: {confirm: 'Are you sure?'} %></td>
-      <% end %>
+      </tr>
+    <% end %>
 
-  <% end %>
-  </tr>
   </tbody>
 </table>
 

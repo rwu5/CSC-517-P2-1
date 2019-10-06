@@ -5,23 +5,23 @@
       <ul class="nav nav-list">
         <li><%= link_to "Show all students", students_path, method: :get %></li>
         <li><%= link_to "Show all librarians", librarians_path %></li>
-        <li><%= link_to "Edit my profile", "/path3" %></li>
+        <li><%= link_to "Edit my profile", "/admins/edit" %></li>
       </ul>
     <% end %>
 
     <% if current_librarian %>
-      <h3>Admin</h3>
+      <h3><%= link_to current_librarian.name, "/students/edit" %></h3>
       <ul class="nav nav-list">
         <li><%= link_to "Edit my profile", "/path3" %></li>
       </ul>
     <% end %>
 
     <% if current_student %>
-      <h3>Admin</h3>
+      <h3><%= link_to current_student.name, "/students/edit" %></h3>
       <ul class="nav nav-list">
         <li><%= link_to "Show all students", students_path, method: :get %></li>
         <li><%= link_to "Show all librarians", librarians_path %></li>
-        <li><%= link_to "Edit my profile", "/path3" %></li>
+        <li><%= link_to "Edit my profile", "/students/edit" %></li>
       </ul>
     <% end %>
 

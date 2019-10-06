@@ -1,5 +1,17 @@
 <h1>Books</h1>
 
+<%= form_tag books_path, :method => 'get' do %>
+  <p>Search Title</p>
+  <%= text_field_tag :search_title, params[:search_title] %>
+  <p>Search ISBN</p>
+  <%= text_field_tag :search_isbn, params[:search_isbn] %>
+  <p>Search University</p>
+  <%= text_field_tag :search_Univ, params[:search_Univ] %>
+  <p>Search Library</p>
+  <%= text_field_tag :search_Library, params[:search_Library] %>
+  <%= submit_tag "Search" %>
+<% end %>
+
 <table class="table table-striped">
   <thead>
   <tr>

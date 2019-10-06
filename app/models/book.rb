@@ -7,14 +7,9 @@ class Book < ApplicationRecord
   belongs_to :university
   belongs_to :library
 
-  def self.search(search, a)
-      if !a.blank?
-        where(["isbn LIKE ?", "%#{a}%"])
-        if !search.blank?
-          where(["title LIKE ?","#{search}"])
-        end
-      elsif search
-        where(["title LIKE ?","%#{search}%"])
+  def self.search(title, isbn, univ, lib)
+      if !title.blank? || !isbn.blank? || !univ.blank? || !lib.blank?
+        where(["isbn LIKE ?", "%#{isbn}%"]).where(["title LIKE ?","%#{title}%"]).where(["university_id LIKE ?", "%#{univ}%"]).where(["library_id LIKE ?","%#{lib}%"])
       else
         all
       end
