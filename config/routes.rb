@@ -50,5 +50,6 @@ Rails.application.routes.draw do
 
   post 'l/approve_hold_request/:id', to: 'hold_lists#approve_hold_request'
   post 'l/deny_hold_request/:id', to: 'hold_lists#deny_hold_request'
+  get 'l/change_working_place', to: 'librarians#working_place'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

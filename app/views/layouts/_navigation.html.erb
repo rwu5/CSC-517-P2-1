@@ -25,27 +25,23 @@
         </ul>
       </div>
     <% end %>
-      <!--    =================================================================-->
-      <% if current_librarian %>
+    <!--    =================================================================-->
+    <% if current_librarian %>
       <div class="navbar-collapse collapse navbar-responsive-collapse">
         <% if current_librarian.is_approved == 1 %>
           <ul class="nav navbar-nav">
             <li><%= link_to "Books", books_path, method: :get %></li>
             <li><%= link_to "Hold Request", hold_lists_path, method: :get %></li>
             <li><%= link_to "Current Checked out Book", student_current_borrow_lists_path, method: :get %></li>
-<!--          <li><%#= link_to "Book Stock", library_book_lists_path, method: :get %></li>-->
-<!--          <li><%#= link_to "Book stock", "", method: :get %></li>-->
-<!--          <li><%#= link_to "Hold Request", s_current_borrowed_list_path, method: :get %></li>-->
-<!--          <li><%#= link_to "Borrowing History", s_request_list_path, method: :get %></li>-->
+            <li></li>
           </ul>
         <% end %>
         <ul class="nav navbar-nav navbar-right">
-<!--          <li><%#= link_to current_student.name, "/students/edit" %></li>-->
           <li><%= link_to("logout", destroy_librarian_session_path, method: :delete) %></li>
 
         </ul>
       </div>
-      <% end %>
+    <% end %>
 
 
     <% if current_admin %>
@@ -71,5 +67,4 @@
     <% end %>
 
   </div>
-</div>
 </div>

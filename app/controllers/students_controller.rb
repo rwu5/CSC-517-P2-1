@@ -42,7 +42,7 @@ class StudentsController < ApplicationController
   # PATCH/PUT /libraries/1.json
   def update
     @student = Student.find(params[:id])
-    if @student.update(user_params)
+    if @student.update(student_params)
       redirect_to root_path
     else
       render 'edit'
@@ -67,6 +67,6 @@ class StudentsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def student_params
-    params.require(:student).permit(:name, :university_id, :location, :max_day_can_borrow, :overdue_fine)
+    params.require(:student).permit(:email, :password, :name, :education_level, :university_id)
   end
 end

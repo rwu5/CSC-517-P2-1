@@ -22,6 +22,9 @@ class LibrariansController < ApplicationController
     @librarian = Librarian.find(params[:id])
   end
 
+  def working_place
+  end
+
   # POST /libraries
   # POST /libraries.json
   def create
