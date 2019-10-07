@@ -89,7 +89,8 @@ class StudentPageController < ApplicationController
         else
           StudentCurrentBorrowList.new(student_id: h.student_id, book_id: h.book_id).save
           BorrowHistory.new(student_id: h.student_id, book_id: h.book_id).save
-          #   TODO: email this student
+          StudentMailer.borrow_success(Student.find(h.student_id).email).deliver_later
+          #   TODO: email this student ()check function
           @book_stock.number -= 1
           @book_stock.save
           h.destroy

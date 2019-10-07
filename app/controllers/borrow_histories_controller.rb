@@ -15,6 +15,7 @@ class BorrowHistoriesController < ApplicationController
   # GET /borrow_histories/new
   def new
     @borrow_history = BorrowHistory.new
+
   end
 
   # GET /borrow_histories/1/edit
