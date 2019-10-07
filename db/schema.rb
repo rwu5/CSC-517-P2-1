@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_06_001936) do
+ActiveRecord::Schema.define(version: 2019_10_07_054747) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -36,6 +36,12 @@ ActiveRecord::Schema.define(version: 2019_10_06_001936) do
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
+    t.string "author"
+    t.string "language"
+    t.date "published_date"
+    t.integer "edition"
+    t.text "summery"
+    t.string "subject"
     t.index ["library_id"], name: "index_books_on_library_id"
     t.index ["university_id"], name: "index_books_on_university_id"
   end
