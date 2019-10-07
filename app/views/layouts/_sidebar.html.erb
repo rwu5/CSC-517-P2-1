@@ -10,9 +10,9 @@
     <% end %>
 
     <% if current_librarian %>
-      <h3><%= link_to current_librarian.name, "/students/edit" %></h3>
+      <h3><%= link_to current_librarian.name, "/librarians/edit" %></h3>
       <ul class="nav nav-list">
-        <li><%= link_to "Edit my profile", "/path3" %></li>
+        <li><%= link_to "Edit my profile", "/librarians/edit" %></li>
       </ul>
     <% end %>
 
