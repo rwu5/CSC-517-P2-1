@@ -17,7 +17,7 @@
         <tr>
           <td class="text-center"><%= Student.find(hold_list.student_id).name %></td>
           <td class="text-center"><%= Book.find(hold_list.book_id).title %></td>
-          <td class="text-center"><%= LibraryBookList.find_by_book_id(hold_list.book_id).number%></td>
+          <td class="text-center"><%= LibraryBookList.find_by_book_id(hold_list.book_id).number %></td>
           <td class="text-center"><%= link_to 'Approve', "l/approve_hold_request/" + hold_list.id.to_s, method: :post %></td>
           <td class="text-center"><%= link_to 'Deny', "/l/deny_hold_request/" + hold_list.id.to_s, method: :post %></td>
         </tr>
@@ -26,6 +26,7 @@
       <tr>
         <td class="text-center"><%= Student.find(hold_list.student_id).name %></td>
         <td class="text-center"><%= Book.find(hold_list.book_id).title %></td>
+        <td class="text-center"><%= LibraryBookList.find_by_book_id(hold_list.book_id).number %></td>
         <td class="text-center"><%= link_to 'Approve', "l/approve_hold_request/" + hold_list.id.to_s, method: :post %></td>
         <td class="text-center"><%= link_to 'Deny', "/l/deny_hold_request/" + hold_list.id.to_s, method: :post %></td>
       </tr>
