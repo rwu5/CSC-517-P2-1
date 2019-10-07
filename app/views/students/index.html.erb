@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Students</h1>
 
 <table class="table table-striped">
@@ -23,7 +21,7 @@
       <td class="text-center"><%= student.education_level %></td>
       <td class="text-center"><%= University.find(student.university_id).name %></td>
       <td><%= link_to "Edit", "/admin/students/" + student.id.to_s + "/edit", method: :get %></td>
-      <td><%= link_to "delete", "/admin/students/" + student.id.to_s, method: :delete %></td>
+      <td><%= link_to "Delete", "/admin/students/" + student.id.to_s, method: :delete %></td>
     </tr>
   <% end %>
   </tbody>

@@ -26,11 +26,6 @@
     <%= form.text_field :name %>
   </div>
 
-  <div class="field">
-    <%= form.label :education_level %>
-    <%= form.number_field :education_level %>
-  </div>
-
   <div class="form-group">
     <%= form.label :university_id %>
     <%= select("student", "university_id", University.all.collect{ |c| [ c.name, c.id] }) %>

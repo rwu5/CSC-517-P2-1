@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Librarians</h1>
 
 <table class="table table-striped">
@@ -24,12 +22,13 @@
         <td><%= link_to "Approve", '/a/approve_librarian/' + librarian.id.to_s, method: :get %></td>
         <td><%= link_to "Deny", '/a/deny_librarian/' + librarian.id.to_s, method: :delete %></td>
       <% else %>
-        <td><%= link_to "destroy", '/a/deny_librarian/' + librarian.id.to_s, method: :delete %></td>
+        <td><%= link_to "Edit", edit_librarian_path(librarian), method: :get %></td>
+        <td><%= link_to "Delete", librarian_path(librarian), method: :delete %></td>
       <% end %>
     </tr>
   <% end %>
   </tbody>
 </table>
-<td>Add Librarian: Please log out and sign up as librarian</td>
+<td><%= link_to 'New Librarian', new_librarian_path %></td>
 <br>
 

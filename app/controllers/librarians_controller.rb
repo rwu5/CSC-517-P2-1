@@ -22,17 +22,14 @@ class LibrariansController < ApplicationController
     @librarian = Librarian.find(params[:id])
   end
 
-  def working_place
-  end
-
   # POST /libraries
   # POST /libraries.json
   def create
-    @librarian = Librarian.new(student_params)
+    @librarian = Librarian.new(librarian_params)
 
     respond_to do |format|
       if @librarian.save
-        format.html { redirect_to @librarian, notice: 'Student was successfully created.' }
+        format.html { redirect_to @librarian, notice: 'Librarian was successfully created.' }
         format.json { render :show, status: :created, location: @librarian }
       else
         format.html { render :new }
@@ -45,7 +42,7 @@ class LibrariansController < ApplicationController
   # PATCH/PUT /libraries/1.json
   def update
     @librarian = Librarian.find(params[:id])
-    if @librarian.update(user_params)
+    if @librarian.update(librarian_params)
       redirect_to root_path
     else
       render 'edit'
@@ -57,7 +54,7 @@ class LibrariansController < ApplicationController
   def destroy
     @librarian.destroy
     respond_to do |format|
-      format.html { redirect_to students_url, notice: 'Student was successfully destroyed.' }
+      format.html { redirect_to librarians_url, notice: 'Librarian was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -70,6 +67,6 @@ class LibrariansController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def librarian_params
-    params.require(:librarian).permit(:name, :library_id)
+    params.require(:librarian).permit(:email, :password, :name, :library_id)
   end
 end
