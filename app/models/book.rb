@@ -7,9 +7,9 @@ class Book < ApplicationRecord
   belongs_to :university
   belongs_to :library
 
-  def self.search(title, isbn, univ, lib)
-      if !title.blank? || !isbn.blank? || !univ.blank? || !lib.blank?
-        where(["isbn LIKE ?", "%#{isbn}%"]).where(["title LIKE ?","%#{title}%"]).where(["university_id LIKE ?", "%#{univ}%"]).where(["library_id LIKE ?","%#{lib}%"])
+  def self.search(title, author, subject, date)
+      if !title.blank? || !author.blank? || !subject.blank? || !date.blank?
+        where(["author LIKE ?", "%#{author}%"]).where(["title LIKE ?","%#{title}%"]).where(["subject LIKE ?", "%#{subject}%"]).where(["published_date LIKE ?","%#{date}%"])
       else
         all
       end
