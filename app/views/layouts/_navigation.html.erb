@@ -6,7 +6,15 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="/">Library Management System</a>
+    <% if admin_signed_in? %>
+      <%= link_to "Library Management System", authenticated_admin_path, class: "navbar-brand" %>
+    <% elsif librarian_signed_in? %>
+      <%= link_to "Library Management System", authenticated_librarian_path, class: "navbar-brand" %>
+    <% elsif student_signed_in? %>
+      <%= link_to "Library Management System", authenticated_student_path, class: "navbar-brand" %>
+    <% else %>
+      <%= link_to "Library Management System", "/s/books", class: "navbar-brand" %>
+    <% end %>
     <!--    =================================================================-->
     <% if current_student %>
       <div class="navbar-collapse collapse navbar-responsive-collapse">

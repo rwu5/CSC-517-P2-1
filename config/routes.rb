@@ -28,7 +28,6 @@ Rails.application.routes.draw do
     resources :librarians
   end
 
-  root to: 'home#index'
 
   get 's/libraries', to: 'student_page#show_libraries'
   get 's/books', to: 'student_page#show_books'
@@ -51,5 +50,20 @@ Rails.application.routes.draw do
   post 'l/approve_hold_request/:id', to: 'hold_lists#approve_hold_request'
   post 'l/deny_hold_request/:id', to: 'hold_lists#deny_hold_request'
   get 'l/change_working_place', to: 'librarians#working_place'
+
+  authenticated :librarian do
+    root to: "books#index", as: :authenticated_librarian
+  end
+
+  authenticated :admin do
+    root to: "books#index", as: :authenticated_admin
+  end
+
+  authenticated :student do
+    root to: "student_page#show_books", as: :authenticated_student
+  end
+
+  root to: 'home#index'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
