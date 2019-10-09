@@ -16,7 +16,7 @@ class Book < ApplicationRecord
 
   def self.search(title, author, subject, date)
       if !title.blank? || !author.blank? || !subject.blank? || !date.blank?
-        where(["author LIKE ?", "%#{author}%"]).where(["title LIKE ?","%#{title}%"]).where(["subject LIKE ?", "%#{subject}%"]).where(["published_date LIKE ?","%#{date}%"])
+        where(["author LIKE ?", "%#{author}%"]).where(["title LIKE ?","%#{title}%"]).where(["subject LIKE ?", "%#{subject}%"]).where(["cast(published_date as VARCHAR) LIKE ?","%#{date}%"])
       else
         all
       end
